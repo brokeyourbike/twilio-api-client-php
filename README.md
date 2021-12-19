@@ -19,9 +19,13 @@ composer require brokeyourbike/twilio-api-client
 ## Usage
 
 ```php
+use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
 use BrokeYourBike\Twilio\V1\Client;
 
-$apiClient = new Client($config, $httpClient, $psrCache);
+assert($config instanceof ConfigInterface)
+assert($httpClient instanceof \GuzzleHttp\ClientInterface)
+
+$apiClient = new Client($config, $httpClient);
 $apiClient->lookupPhoneNumber('+123456789');
 ```
 
