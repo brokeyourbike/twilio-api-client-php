@@ -19,10 +19,10 @@ composer require brokeyourbike/twilio-api-client
 ## Usage
 
 ```php
-use BrokeYourBike\Twilio\Client;
+use BrokeYourBike\Twilio\V1\Client;
 
 $apiClient = new Client($config, $httpClient, $psrCache);
-$apiClient->fetchAuthTokenRaw();
+$apiClient->lookupPhoneNumber('+123456789');
 ```
 
 ## Why
