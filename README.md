@@ -25,8 +25,8 @@ use BrokeYourBike\Twilio\V1\Lookup;
 assert($config instanceof ConfigInterface)
 assert($httpClient instanceof \GuzzleHttp\ClientInterface)
 
-$apiClient = new Client($config, $httpClient);
-$apiClient->lookupPhoneNumber('+123456789');
+$lookup = new Lookup($config, $httpClient);
+$lookup->phoneNumber('+123456789');
 ```
 
 ## Why
