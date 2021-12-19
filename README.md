@@ -20,7 +20,7 @@ composer require brokeyourbike/twilio-api-client
 
 ```php
 use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
-use BrokeYourBike\Twilio\V1\Client;
+use BrokeYourBike\Twilio\V1\Lookup;
 
 assert($config instanceof ConfigInterface)
 assert($httpClient instanceof \GuzzleHttp\ClientInterface)

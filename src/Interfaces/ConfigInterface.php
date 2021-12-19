@@ -13,7 +13,6 @@ namespace BrokeYourBike\Twilio\Interfaces;
  */
 interface ConfigInterface
 {
-    public function getUrl(): string;
     public function getSid(): string;
     public function getSecret(): string;
 }

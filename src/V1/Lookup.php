@@ -23,10 +23,12 @@ use BrokeYourBike\HttpClient\HttpClientInterface;
 /**
  * @author Ivan Stasiuk <brokeyourbike@gmail.com>
  */
-class Client implements HttpClientInterface
+class Lookup implements HttpClientInterface
 {
     use HttpClientTrait;
     use ResolveUriTrait;
+
+    public const BASE_URL = 'https://lookups.twilio.com/v1/';
 
     private ConfigInterface $config;
 
@@ -36,7 +38,7 @@ class Client implements HttpClientInterface
         $this->httpClient = $httpClient;
     }
 
-    public function lookupPhoneNumberWithCarrier(string $phoneNumber, ?string $countryCode = null): PhoneNumberWithCarrierResponse
+    public function phoneNumberWithCarrier(string $phoneNumber, ?string $countryCode = null): PhoneNumberWithCarrierResponse
     {
         $options = (new PhoneNumberOptions())->setType('carrier');
 
@@ -44,19 +46,19 @@ class Client implements HttpClientInterface
             $options->setCountryCode($countryCode);
         }
 
-        $response = $this->lookupPhoneNumberRaw($phoneNumber, $options);
+        $response = $this->phoneNumberRaw($phoneNumber, $options);
         return new PhoneNumberWithCarrierResponse($response);
     }
 
-    public function lookupPhoneNumber(string $phoneNumber, ?PhoneNumberOptions $options = null): PhoneNumberResponse
+    public function phoneNumber(string $phoneNumber, ?PhoneNumberOptions $options = null): PhoneNumberResponse
     {
-        $response = $this->lookupPhoneNumberRaw($phoneNumber, $options ?? new PhoneNumberOptions());
+        $response = $this->phoneNumberRaw($phoneNumber, $options ?? new PhoneNumberOptions());
         return new PhoneNumberResponse($response);
     }
 
-    public function lookupPhoneNumberRaw(string $phoneNumber, ?PhoneNumberOptions $options = null): ResponseInterface
+    public function phoneNumberRaw(string $phoneNumber, ?PhoneNumberOptions $options = null): ResponseInterface
     {
-        return $this->performRequest(HttpMethodEnum::GET(), "v1/PhoneNumbers/{$phoneNumber}", $options ?? new PhoneNumberOptions());
+        return $this->performRequest(HttpMethodEnum::GET(), "PhoneNumbers/{$phoneNumber}", $options ?? new PhoneNumberOptions());
     }
 
     /**
@@ -84,7 +86,7 @@ class Client implements HttpClientInterface
             $options[\GuzzleHttp\RequestOptions::JSON] = $data->toArray();
         }
 
-        $uri = (string) $this->resolveUriFor($this->config->getUrl(), $uri);
+        $uri = (string) $this->resolveUriFor(self::BASE_URL, $uri);
         return $this->httpClient->request((string) $method, $uri, $options);
     }
 }

@@ -10,13 +10,13 @@ namespace BrokeYourBike\Twilio\Tests;
 
 use Psr\SimpleCache\CacheInterface;
 use Psr\Http\Message\ResponseInterface;
-use BrokeYourBike\Twilio\V1\Client;
+use BrokeYourBike\Twilio\V1\Lookup;
 use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
 
 /**
  * @author Ivan Stasiuk <brokeyourbike@gmail.com>
  */
-class LookupPhoneNumberRawTest extends TestCase
+class phoneNumberRawTest extends TestCase
 {
     private string $sid = '12345';
     private string $secret = 'super-secure-token';
@@ -26,7 +26,6 @@ class LookupPhoneNumberRawTest extends TestCase
     public function it_can_prepare_request(): void
     {
         $mockedConfig = $this->getMockBuilder(ConfigInterface::class)->getMock();
-        $mockedConfig->method('getUrl')->willReturn('https://api.example/');
         $mockedConfig->method('getSid')->willReturn($this->sid);
         $mockedConfig->method('getSecret')->willReturn($this->secret);
 
@@ -46,7 +45,7 @@ class LookupPhoneNumberRawTest extends TestCase
         $mockedClient = \Mockery::mock(\GuzzleHttp\Client::class);
         $mockedClient->shouldReceive('request')->withArgs([
             'GET',
-            'https://api.example/v1/PhoneNumbers/+123456789',
+            Lookup::BASE_URL.'PhoneNumbers/+123456789',
             [
                 \GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
                 \GuzzleHttp\RequestOptions::HEADERS => [
@@ -64,9 +63,9 @@ class LookupPhoneNumberRawTest extends TestCase
          * @var ConfigInterface $mockedConfig
          * @var \GuzzleHttp\Client $mockedClient
          * */
-        $api = new Client($mockedConfig, $mockedClient);
+        $api = new Lookup($mockedConfig, $mockedClient);
 
-        $requestResult = $api->lookupPhoneNumberRaw($this->phone);
+        $requestResult = $api->phoneNumberRaw($this->phone);
 
         $this->assertInstanceOf(ResponseInterface::class, $requestResult);
     }

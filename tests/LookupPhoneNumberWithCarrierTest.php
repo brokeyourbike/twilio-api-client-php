@@ -9,7 +9,7 @@
 namespace BrokeYourBike\Twilio\Tests;
 
 use Psr\Http\Message\ResponseInterface;
-use BrokeYourBike\Twilio\V1\Client;
+use BrokeYourBike\Twilio\V1\Lookup;
 use BrokeYourBike\Twilio\Models\PhoneNumberWithCarrierResponse;
 use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
 
@@ -26,7 +26,6 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
     public function it_can_prepare_request(): void
     {
         $mockedConfig = $this->getMockBuilder(ConfigInterface::class)->getMock();
-        $mockedConfig->method('getUrl')->willReturn('https://api.example/');
         $mockedConfig->method('getSid')->willReturn($this->sid);
         $mockedConfig->method('getSecret')->willReturn($this->secret);
 
@@ -52,7 +51,7 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
         $mockedClient = \Mockery::mock(\GuzzleHttp\Client::class);
         $mockedClient->shouldReceive('request')->withArgs([
             'GET',
-            'https://api.example/v1/PhoneNumbers/+123456789',
+            Lookup::BASE_URL.'PhoneNumbers/+123456789',
             [
                 \GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
                 \GuzzleHttp\RequestOptions::HEADERS => [
@@ -72,9 +71,9 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
          * @var ConfigInterface $mockedConfig
          * @var \GuzzleHttp\Client $mockedClient
          * */
-        $api = new Client($mockedConfig, $mockedClient);
+        $api = new Lookup($mockedConfig, $mockedClient);
 
-        $requestResult = $api->lookupPhoneNumberWithCarrier($this->phone);
+        $requestResult = $api->phoneNumberWithCarrier($this->phone);
 
         $this->assertInstanceOf(PhoneNumberWithCarrierResponse::class, $requestResult);
     }
@@ -83,7 +82,6 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
     public function it_can_set_country_code()
     {
         $mockedConfig = $this->getMockBuilder(ConfigInterface::class)->getMock();
-        $mockedConfig->method('getUrl')->willReturn('https://api.example/');
         $mockedConfig->method('getSid')->willReturn($this->sid);
         $mockedConfig->method('getSecret')->willReturn($this->secret);
 
@@ -109,7 +107,7 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
         $mockedClient = \Mockery::mock(\GuzzleHttp\Client::class);
         $mockedClient->shouldReceive('request')->withArgs([
             'GET',
-            'https://api.example/v1/PhoneNumbers/+123456789',
+            Lookup::BASE_URL.'PhoneNumbers/+123456789',
             [
                 \GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
                 \GuzzleHttp\RequestOptions::HEADERS => [
@@ -130,9 +128,9 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
          * @var ConfigInterface $mockedConfig
          * @var \GuzzleHttp\Client $mockedClient
          * */
-        $api = new Client($mockedConfig, $mockedClient);
+        $api = new Lookup($mockedConfig, $mockedClient);
 
-        $requestResult = $api->lookupPhoneNumberWithCarrier($this->phone, 'US');
+        $requestResult = $api->phoneNumberWithCarrier($this->phone, 'US');
 
         $this->assertInstanceOf(PhoneNumberWithCarrierResponse::class, $requestResult);
     }
