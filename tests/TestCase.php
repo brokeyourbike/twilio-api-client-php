@@ -6,18 +6,16 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
-namespace BrokeYourBike\Twilio;
+namespace BrokeYourBike\Twilio\Tests;
 
 /**
  * @author Ivan Stasiuk <brokeyourbike@gmail.com>
  */
-abstract class Options
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected array $options = [];
-
-    public function toArray(): array
+    protected function tearDown(): void
     {
-        return $this->options;
+        parent::tearDown();
+        \Mockery::close();
     }
 }
-

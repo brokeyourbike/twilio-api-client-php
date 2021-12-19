@@ -1,0 +1,27 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Constant BrokeYourBike\\\\Twilio\\\\Enums\\\\CallerTypeEnum\\:\\:BUSINESS is unused\\.$#"
+			count: 1
+			path: src/Enums/CallerTypeEnum.php
+
+		-
+			message: "#^Constant BrokeYourBike\\\\Twilio\\\\Enums\\\\CallerTypeEnum\\:\\:CONSUMER is unused\\.$#"
+			count: 1
+			path: src/Enums/CallerTypeEnum.php
+
+		-
+			message: "#^Constant BrokeYourBike\\\\Twilio\\\\Enums\\\\CarrierTypeEnum\\:\\:LANDLINE is unused\\.$#"
+			count: 1
+			path: src/Enums/CarrierTypeEnum.php
+
+		-
+			message: "#^Constant BrokeYourBike\\\\Twilio\\\\Enums\\\\CarrierTypeEnum\\:\\:MOBILE is unused\\.$#"
+			count: 1
+			path: src/Enums/CarrierTypeEnum.php
+
+		-
+			message: "#^Constant BrokeYourBike\\\\Twilio\\\\Enums\\\\CarrierTypeEnum\\:\\:VOIP is unused\\.$#"
+			count: 1
+			path: src/Enums/CarrierTypeEnum.php
+

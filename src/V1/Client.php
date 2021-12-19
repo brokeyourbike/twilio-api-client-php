@@ -11,6 +11,7 @@ namespace BrokeYourBike\Twilio\V1;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\ClientInterface;
 use BrokeYourBike\Twilio\Options;
+use BrokeYourBike\Twilio\Models\PhoneNumberWithCarrierResponse;
 use BrokeYourBike\Twilio\Models\PhoneNumberResponse;
 use BrokeYourBike\Twilio\Models\PhoneNumberOptions;
 use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
@@ -35,16 +36,33 @@ class Client implements HttpClientInterface
         $this->httpClient = $httpClient;
     }
 
-    public function fetchPhoneNumber(string $phoneNumber, PhoneNumberOptions $options): PhoneNumberResponse
+    public function lookupPhoneNumberWithCarrier(string $phoneNumber, ?string $countryCode = null): PhoneNumberWithCarrierResponse
     {
-        $response = $this->performRequest(HttpMethodEnum::GET(), "PhoneNumbers/{$phoneNumber}", $options);
+        $options = (new PhoneNumberOptions())->setType('carrier');
+
+        if ($countryCode !== null) {
+            $options->setCountryCode($countryCode);
+        }
+
+        $response = $this->lookupPhoneNumberRaw($phoneNumber, $options);
+        return new PhoneNumberWithCarrierResponse($response);
+    }
+
+    public function lookupPhoneNumber(string $phoneNumber, ?PhoneNumberOptions $options = null): PhoneNumberResponse
+    {
+        $response = $this->lookupPhoneNumberRaw($phoneNumber, $options ?? new PhoneNumberOptions());
         return new PhoneNumberResponse($response);
+    }
+
+    public function lookupPhoneNumberRaw(string $phoneNumber, ?PhoneNumberOptions $options = null): ResponseInterface
+    {
+        return $this->performRequest(HttpMethodEnum::GET(), "v1/PhoneNumbers/{$phoneNumber}", $options ?? new PhoneNumberOptions());
     }
 
     /**
      * @param HttpMethodEnum $method
      * @param string $uri
-     * @param array<mixed> $data
+     * @param Options $data
      * @return ResponseInterface
      */
     private function performRequest(HttpMethodEnum $method, string $uri, Options $data): ResponseInterface
@@ -61,9 +79,9 @@ class Client implements HttpClientInterface
         ];
 
         if (HttpMethodEnum::GET()->equals($method)) {
-            $options[\GuzzleHttp\RequestOptions::QUERY] = $data;
+            $options[\GuzzleHttp\RequestOptions::QUERY] = $data->toArray();
         } elseif (HttpMethodEnum::POST()->equals($method)) {
-            $options[\GuzzleHttp\RequestOptions::JSON] = $data;
+            $options[\GuzzleHttp\RequestOptions::JSON] = $data->toArray();
         }
 
         $uri = (string) $this->resolveUriFor($this->config->getUrl(), $uri);
