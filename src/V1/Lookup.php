@@ -1,6 +1,6 @@
 <?php
 
-// Copyright (C) 2021 Ivan Stasiuk <brokeyourbike@gmail.com>.
+// Copyright (C) 2021 Ivan Stasiuk <ivan@stasi.uk>.
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
@@ -21,7 +21,7 @@ use BrokeYourBike\HttpClient\HttpClientTrait;
 use BrokeYourBike\HttpClient\HttpClientInterface;
 
 /**
- * @author Ivan Stasiuk <brokeyourbike@gmail.com>
+ * @author Ivan Stasiuk <ivan@stasi.uk>
  */
 class Lookup implements HttpClientInterface
 {
@@ -58,7 +58,7 @@ class Lookup implements HttpClientInterface
 
     public function phoneNumberRaw(string $phoneNumber, ?PhoneNumberOptions $options = null): ResponseInterface
     {
-        return $this->performRequest(HttpMethodEnum::GET(), "PhoneNumbers/{$phoneNumber}", $options ?? new PhoneNumberOptions());
+        return $this->performRequest(HttpMethodEnum::GET, "PhoneNumbers/{$phoneNumber}", $options ?? new PhoneNumberOptions());
     }
 
     /**
@@ -80,13 +80,14 @@ class Lookup implements HttpClientInterface
             ],
         ];
 
-        if (HttpMethodEnum::GET()->equals($method)) {
-            $options[\GuzzleHttp\RequestOptions::QUERY] = $data->toArray();
-        } elseif (HttpMethodEnum::POST()->equals($method)) {
-            $options[\GuzzleHttp\RequestOptions::JSON] = $data->toArray();
-        }
+        $option = match($method) {
+            HttpMethodEnum::GET => \GuzzleHttp\RequestOptions::QUERY,
+            default => \GuzzleHttp\RequestOptions::JSON,
+        };
+
+        $options[$option] = $data->toArray();
 
         $uri = (string) $this->resolveUriFor(self::BASE_URL, $uri);
-        return $this->httpClient->request((string) $method, $uri, $options);
+        return $this->httpClient->request($method->value, $uri, $options);
     }
 }
