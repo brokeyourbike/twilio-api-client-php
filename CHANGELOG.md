@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.2](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.1...v0.2.2) (2021-12-25)
+
+
+### Bug Fixes
+
+* use native enums ([d44e4d3](https://www.github.com/brokeyourbike/twilio-api-client-php/commit/d44e4d3d854c95db2d6b7717350acfe7d00414c1))
+
 ### [0.2.1](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.0...v0.2.1) (2021-12-19)
 
 
