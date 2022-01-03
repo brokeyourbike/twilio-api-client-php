@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.3](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.2...v0.2.3) (2022-01-03)
+
+
+### Bug Fixes
+
+* update `brokeyourbike/data-transfer-object` ([f3c08a8](https://www.github.com/brokeyourbike/twilio-api-client-php/commit/f3c08a886d63536192f7fa7336823d4a885fa464))
+
 ### [0.2.2](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.1...v0.2.2) (2021-12-25)
 
 
