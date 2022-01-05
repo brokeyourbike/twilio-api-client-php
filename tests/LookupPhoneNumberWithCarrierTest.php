@@ -62,7 +62,7 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
                     $this->secret,
                 ],
                 \GuzzleHttp\RequestOptions::QUERY => [
-                    'type' => 'carrier',
+                    'Type' => 'carrier',
                 ],
             ],
         ])->once()->andReturn($mockedResponse);
@@ -118,8 +118,8 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
                     $this->secret,
                 ],
                 \GuzzleHttp\RequestOptions::QUERY => [
-                    'type' => 'carrier',
-                    'countryCode' => 'US',
+                    'Type' => 'carrier',
+                    'CountryCode' => 'US',
                 ],
             ],
         ])->once()->andReturn($mockedResponse);

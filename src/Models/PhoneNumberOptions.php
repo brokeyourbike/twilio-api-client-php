@@ -17,13 +17,13 @@ class PhoneNumberOptions extends Options
 {
     public function setCountryCode(string $countryCode): self
     {
-        $this->options['countryCode'] = $countryCode;
+        $this->options['CountryCode'] = $countryCode;
         return $this;
     }
 
     public function setType(string $type): self
     {
-        $this->options['type'] = $type;
+        $this->options['Type'] = $type;
         return $this;
     }
 }
