@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.4](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.3...v0.2.4) (2022-01-05)
+
+
+### Bug Fixes
+
+* use correct option key ([2368de1](https://www.github.com/brokeyourbike/twilio-api-client-php/commit/2368de19368576ca41eb949cbfb97c0b658c39ec))
+
 ### [0.2.3](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.2...v0.2.3) (2022-01-03)
 
 
