@@ -17,7 +17,7 @@ use Spatie\DataTransferObject\Attributes\MapFrom;
 class Carrier extends DataTransferObject
 {
     #[MapFrom('error_code')]
-    public string|null $errorCode;
+    public ?string $errorCode;
 
     #[MapFrom('mobile_country_code')]
     public string $mobileCountryCode;

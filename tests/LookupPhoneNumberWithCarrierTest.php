@@ -10,7 +10,7 @@ namespace BrokeYourBike\Twilio\Tests;
 
 use Psr\Http\Message\ResponseInterface;
 use BrokeYourBike\Twilio\V1\Lookup;
-use BrokeYourBike\Twilio\Models\PhoneNumberWithCarrierResponse;
+use BrokeYourBike\Twilio\Models\PhoneNumberResponse;
 use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
 
 /**
@@ -75,7 +75,7 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
 
         $requestResult = $api->phoneNumberWithCarrier($this->phone);
 
-        $this->assertInstanceOf(PhoneNumberWithCarrierResponse::class, $requestResult);
+        $this->assertInstanceOf(PhoneNumberResponse::class, $requestResult);
     }
 
     /** @test */
@@ -132,6 +132,6 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
 
         $requestResult = $api->phoneNumberWithCarrier($this->phone, 'US');
 
-        $this->assertInstanceOf(PhoneNumberWithCarrierResponse::class, $requestResult);
+        $this->assertInstanceOf(PhoneNumberResponse::class, $requestResult);
     }
 }

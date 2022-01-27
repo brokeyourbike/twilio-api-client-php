@@ -19,18 +19,21 @@ use BrokeYourBike\DataTransferObject\JsonResponse;
 class PhoneNumberResponse extends JsonResponse
 {
     #[MapFrom('caller_name')]
-    public CallerName|null $callerName;
+    public ?CallerName $callerName;
 
-    public Carrier|null $carrier;
+    public ?Carrier $carrier;
 
     #[MapFrom('country_code')]
-    public string $countryCode;
+    public ?string $countryCode;
 
     #[MapFrom('national_format')]
-    public string $nationalFormat;
+    public ?string $nationalFormat;
 
     #[MapFrom('phone_number')]
-    public string $phoneNumber;
+    public ?string $phoneNumber;
 
-    public string $url;
+    public ?string $url;
+    public ?string $code;
+    public ?string $message;
+    public ?string $status;
 }

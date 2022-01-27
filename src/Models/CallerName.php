@@ -17,11 +17,11 @@ use Spatie\DataTransferObject\Attributes\MapFrom;
 class CallerName extends DataTransferObject
 {
     #[MapFrom('error_code')]
-    public string|null $errorCode;
+    public ?string $errorCode;
 
     #[MapFrom('caller_name')]
-    public string|null $callerName;
+    public ?string $callerName;
 
     #[MapFrom('caller_type')]
-    public string|null $callerType;
+    public ?string $callerType;
 }

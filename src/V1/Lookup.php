@@ -11,7 +11,6 @@ namespace BrokeYourBike\Twilio\V1;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\ClientInterface;
 use BrokeYourBike\Twilio\Options;
-use BrokeYourBike\Twilio\Models\PhoneNumberWithCarrierResponse;
 use BrokeYourBike\Twilio\Models\PhoneNumberResponse;
 use BrokeYourBike\Twilio\Models\PhoneNumberOptions;
 use BrokeYourBike\Twilio\Interfaces\ConfigInterface;
@@ -38,7 +37,7 @@ class Lookup implements HttpClientInterface
         $this->httpClient = $httpClient;
     }
 
-    public function phoneNumberWithCarrier(string $phoneNumber, ?string $countryCode = null): PhoneNumberWithCarrierResponse
+    public function phoneNumberWithCarrier(string $phoneNumber, ?string $countryCode = null): PhoneNumberResponse
     {
         $options = (new PhoneNumberOptions())->setType('carrier');
 
@@ -47,7 +46,7 @@ class Lookup implements HttpClientInterface
         }
 
         $response = $this->phoneNumberRaw($phoneNumber, $options);
-        return new PhoneNumberWithCarrierResponse($response);
+        return new PhoneNumberResponse($response);
     }
 
     public function phoneNumber(string $phoneNumber, ?PhoneNumberOptions $options = null): PhoneNumberResponse
