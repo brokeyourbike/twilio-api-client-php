@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.4...v0.3.0) (2022-01-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* we can always expect an error
+
+### Bug Fixes
+
+* we can always expect an error ([6297561](https://www.github.com/brokeyourbike/twilio-api-client-php/commit/62975617d2cd501745193b4d4732696ea0dc7ab8))
+
 ### [0.2.4](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.3...v0.2.4) (2022-01-05)
 
 
