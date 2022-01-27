@@ -134,4 +134,52 @@ class LookupPhoneNumberWithCarrierTest extends TestCase
 
         $this->assertInstanceOf(PhoneNumberResponse::class, $requestResult);
     }
+
+    /** @test */
+    public function it_can_handle_404_error_respose()
+    {
+        $mockedConfig = $this->getMockBuilder(ConfigInterface::class)->getMock();
+        $mockedConfig->method('getSid')->willReturn($this->sid);
+        $mockedConfig->method('getSecret')->willReturn($this->secret);
+
+        $mockedResponse = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $mockedResponse->method('getStatusCode')->willReturn(200);
+        $mockedResponse->method('getBody')
+            ->willReturn('{
+                "code": 20404,
+                "message": "The requested resource /PhoneNumbers/+123456789 was not found",
+                "more_info": "https://www.twilio.com/docs/errors/20404",
+                "status": 404
+            }');
+
+        /** @var \Mockery\MockInterface $mockedClient */
+        $mockedClient = \Mockery::mock(\GuzzleHttp\Client::class);
+        $mockedClient->shouldReceive('request')->withArgs([
+            'GET',
+            Lookup::BASE_URL.'PhoneNumbers/+123456789',
+            [
+                \GuzzleHttp\RequestOptions::HTTP_ERRORS => false,
+                \GuzzleHttp\RequestOptions::HEADERS => [
+                    'Accept' => 'application/json',
+                ],
+                \GuzzleHttp\RequestOptions::AUTH => [
+                    $this->sid,
+                    $this->secret,
+                ],
+                \GuzzleHttp\RequestOptions::QUERY => [
+                    'Type' => 'carrier',
+                ],
+            ],
+        ])->once()->andReturn($mockedResponse);
+
+        /**
+         * @var ConfigInterface $mockedConfig
+         * @var \GuzzleHttp\Client $mockedClient
+         * */
+        $api = new Lookup($mockedConfig, $mockedClient);
+
+        $requestResult = $api->phoneNumberWithCarrier($this->phone);
+
+        $this->assertInstanceOf(PhoneNumberResponse::class, $requestResult);
+    }
 }
