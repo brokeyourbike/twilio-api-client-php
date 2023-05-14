@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.3.0...v0.3.1) (2023-05-14)
+
+
+### Miscellaneous Chores
+
+* badges ([3dc1e0e](https://www.github.com/brokeyourbike/twilio-api-client-php/commit/3dc1e0e15f953f55b54a2f1df85c1cbe27206d08))
+
 ## [0.3.0](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.2.4...v0.3.0) (2022-01-27)
 
 
