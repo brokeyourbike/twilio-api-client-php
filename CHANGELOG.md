@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.2](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.3.1...v0.3.2) (2023-05-20)
+
+
+### Miscellaneous Chores
+
+* button ([6e735fb](https://www.github.com/brokeyourbike/twilio-api-client-php/commit/6e735fbea58ee8869424918252a03481d54979b2))
+
 ### [0.3.1](https://www.github.com/brokeyourbike/twilio-api-client-php/compare/v0.3.0...v0.3.1) (2023-05-14)
 
 
